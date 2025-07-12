@@ -1,7 +1,10 @@
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import LanguageSwitcher from './LanguageSwitcher';
 
 function Navbar() {
   const [showModal, setShowModal] = useState(false);
+  const { t } = useTranslation();
 
   const scrollToSection = (sectionId) => {
     const element = document.getElementById(sectionId);
@@ -31,7 +34,7 @@ function Navbar() {
   const handleFormSubmit = (e) => {
     e.preventDefault();
     // Here you can add form submission logic
-    alert("Arizangiz yuborildi! Tez orada siz bilan bog'lanamiz.");
+    alert(t('navbar.partnerModal.successMessage'));
     setShowModal(false);
   };
 
@@ -85,7 +88,7 @@ function Navbar() {
                   className='nav-link fw-semibold px-3 py-2 btn btn-link border-0 text-decoration-none position-relative nav-link-custom'
                   onClick={() => scrollToSection('hero')}
                 >
-                  Bosh sahifa
+                  {t('navbar.home')}
                 </button>
               </li>
               <li className='nav-item'>
@@ -93,7 +96,7 @@ function Navbar() {
                   className='nav-link fw-semibold px-3 py-2 btn btn-link border-0 text-decoration-none position-relative nav-link-custom'
                   onClick={() => scrollToSection('services')}
                 >
-                  Xizmatlar
+                  {t('navbar.services')}
                 </button>
               </li>
               <li className='nav-item'>
@@ -101,7 +104,7 @@ function Navbar() {
                   className='nav-link fw-semibold px-3 py-2 btn btn-link border-0 text-decoration-none position-relative nav-link-custom'
                   onClick={() => scrollToSection('about')}
                 >
-                  Biz haqimizda
+                  {t('navbar.about')}
                 </button>
               </li>
               <li className='nav-item'>
@@ -109,13 +112,18 @@ function Navbar() {
                   className='nav-link fw-semibold px-3 py-2 btn btn-link border-0 text-decoration-none position-relative nav-link-custom'
                   onClick={() => scrollToSection('contact')}
                 >
-                  Aloqa
+                  {t('navbar.contact')}
                 </button>
               </li>
             </ul>
 
             {/* CTA Button Section - Redesigned for Better Responsive Behavior */}
             <div className='d-flex flex-column flex-lg-row gap-2 align-items-center'>
+              {/* Language Switcher */}
+              <div className='language-switcher d-none d-lg-block'>
+                <LanguageSwitcher />
+              </div>
+
               {/* Phone Number - More responsive visibility */}
               <div className='phone-container d-none d-lg-block'>
                 <button
@@ -148,6 +156,11 @@ function Navbar() {
                 </button>
               </div>
 
+              {/* Mobile Language Switcher */}
+              <div className='d-lg-none w-100 mb-2'>
+                <LanguageSwitcher />
+              </div>
+
               {/* CTA Button */}
               <button
                 className='btn btn-primary rounded-pill fw-semibold position-relative overflow-hidden cta-button w-100 w-lg-auto'
@@ -165,7 +178,7 @@ function Navbar() {
               >
                 <span className='position-relative z-1'>
                   <i className='bi bi-people me-1'></i>
-                  <span className='cta-text'>Hamkor bo'lish</span>
+                  <span className='cta-text'>{t('navbar.partner')}</span>
                 </span>
               </button>
             </div>
@@ -188,7 +201,7 @@ function Navbar() {
               <div className='modal-header border-0 pb-0'>
                 <h5 className='modal-title fw-bold fs-4 fs-md-3' style={{ color: '#ff9556' }}>
                   <i className='bi bi-people-fill me-2'></i>
-                  Hamkor bo'ling!
+                  {t('navbar.partnerModal.title')}
                 </h5>
                 <button
                   type='button'
@@ -211,24 +224,21 @@ function Navbar() {
                   >
                     <i className='bi bi-handshake fs-1' style={{ color: '#ff9556' }}></i>
                   </div>
-                  <h6 className='fw-bold mb-3'>Bizning jamoamizga qo'shiling!</h6>
-                  <p className='text-muted'>
-                    Yolda bilan hamkorlik qiling va o'z biznesingizni rivojlantiring. Biz sizga
-                    barcha imkoniyatlarni taklif qilamiz.
-                  </p>
+                  <h6 className='fw-bold mb-3'>{t('navbar.partnerModal.subtitle')}</h6>
+                  <p className='text-muted'>{t('navbar.partnerModal.description')}</p>
                 </div>
 
                 <form onSubmit={handleFormSubmit}>
                   <div className='row g-3'>
                     <div className='col-md-6'>
                       <label htmlFor='partnerName' className='form-label fw-semibold'>
-                        Ism va Familiya
+                        {t('navbar.partnerModal.name')}
                       </label>
                       <input
                         type='text'
                         className='form-control'
                         id='partnerName'
-                        placeholder='Ismingizni kiriting'
+                        placeholder={t('navbar.partnerModal.namePlaceholder')}
                         style={{
                           borderRadius: '10px',
                           border: '1px solid #e0e0e0',
@@ -238,13 +248,13 @@ function Navbar() {
                     </div>
                     <div className='col-md-6'>
                       <label htmlFor='partnerPhone' className='form-label fw-semibold'>
-                        Telefon raqam
+                        {t('navbar.partnerModal.phone')}
                       </label>
                       <input
                         type='tel'
                         className='form-control'
                         id='partnerPhone'
-                        placeholder='+998 90 123 45 67'
+                        placeholder={t('navbar.partnerModal.phonePlaceholder')}
                         style={{
                           borderRadius: '10px',
                           border: '1px solid #e0e0e0',
@@ -255,13 +265,13 @@ function Navbar() {
                   </div>
                   <div className='mb-3'>
                     <label htmlFor='partnerEmail' className='form-label fw-semibold'>
-                      Email manzil
+                      {t('navbar.partnerModal.email')}
                     </label>
                     <input
                       type='email'
                       className='form-control'
                       id='partnerEmail'
-                      placeholder='email@example.com'
+                      placeholder={t('navbar.partnerModal.emailPlaceholder')}
                       style={{
                         borderRadius: '10px',
                         border: '1px solid #e0e0e0',
@@ -271,7 +281,7 @@ function Navbar() {
                   </div>
                   <div className='mb-3'>
                     <label htmlFor='partnerBusiness' className='form-label fw-semibold'>
-                      Biznes turi
+                      {t('navbar.partnerModal.businessType')}
                     </label>
                     <select
                       className='form-select'
@@ -282,23 +292,31 @@ function Navbar() {
                         minHeight: '44px',
                       }}
                     >
-                      <option value=''>Biznes turini tanlang</option>
-                      <option value='restaurant'>Restoran</option>
-                      <option value='grocery'>Oziq-ovqat do'koni</option>
-                      <option value='pharmacy'>Dorixona</option>
-                      <option value='retail'>Chakana savdo</option>
-                      <option value='other'>Boshqa</option>
+                      <option value=''>{t('navbar.partnerModal.businessTypePlaceholder')}</option>
+                      <option value='restaurant'>
+                        {t('navbar.partnerModal.businessTypes.restaurant')}
+                      </option>
+                      <option value='grocery'>
+                        {t('navbar.partnerModal.businessTypes.grocery')}
+                      </option>
+                      <option value='pharmacy'>
+                        {t('navbar.partnerModal.businessTypes.pharmacy')}
+                      </option>
+                      <option value='retail'>
+                        {t('navbar.partnerModal.businessTypes.retail')}
+                      </option>
+                      <option value='other'>{t('navbar.partnerModal.businessTypes.other')}</option>
                     </select>
                   </div>
                   <div className='mb-4'>
                     <label htmlFor='partnerMessage' className='form-label fw-semibold'>
-                      Qo'shimcha ma'lumot
+                      {t('navbar.partnerModal.message')}
                     </label>
                     <textarea
                       className='form-control'
                       id='partnerMessage'
                       rows={3}
-                      placeholder="Biznesingiz haqida qisqacha ma'lumot bering..."
+                      placeholder={t('navbar.partnerModal.messagePlaceholder')}
                       style={{
                         borderRadius: '10px',
                         border: '1px solid #e0e0e0',
@@ -315,7 +333,7 @@ function Navbar() {
                   onClick={closeModal}
                   style={{ minHeight: '44px' }}
                 >
-                  Bekor qilish
+                  {t('navbar.partnerModal.cancel')}
                 </button>
                 <button
                   type='submit'
@@ -327,7 +345,7 @@ function Navbar() {
                   }}
                 >
                   <i className='bi bi-send me-2'></i>
-                  Yuborish
+                  {t('navbar.partnerModal.submit')}
                 </button>
               </div>
             </div>

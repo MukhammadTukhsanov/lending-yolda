@@ -1,0 +1,211 @@
+{
+  "navbar": {
+    "home": "Bosh sahifa",
+    "services": "Xizmatlar",
+    "about": "Biz haqimizda",
+    "contact": "Aloqa",
+    "partner": "Hamkor bo'lish",
+    "partnerModal": {
+      "title": "Hamkor bo'ling!",
+      "subtitle": "Bizning jamoamizga qo'shiling!",
+      "description": "Yolda bilan hamkorlik qiling va o'z biznesingizni rivojlantiring. Biz sizga barcha imkoniyatlarni taklif qilamiz.",
+      "name": "Ism va Familiya",
+      "namePlaceholder": "Ismingizni kiriting",
+      "phone": "Telefon raqam",
+      "phonePlaceholder": "+998 90 123 45 67",
+      "email": "Email manzil",
+      "emailPlaceholder": "email@example.com",
+      "businessType": "Biznes turi",
+      "businessTypePlaceholder": "Biznes turini tanlang",
+      "businessTypes": {
+        "restaurant": "Restoran",
+        "grocery": "Oziq-ovqat do'koni",
+        "pharmacy": "Dorixona",
+        "retail": "Chakana savdo",
+        "other": "Boshqa"
+      },
+      "message": "Qo'shimcha ma'lumot",
+      "messagePlaceholder": "Biznesingiz haqida qisqacha ma'lumot bering...",
+      "cancel": "Bekor qilish",
+      "submit": "Yuborish",
+      "successMessage": "Arizangiz yuborildi! Tez orada siz bilan bog'lanamiz."
+    }
+  },
+  "hero": {
+    "title": "Tez Yetkazib Berish",
+    "subtitle": "Oson va Ishonchli",
+    "description": "Bizning mobil ilovamiz orqali istalgan mahsulotni 30 daqiqada yetkazib beramiz. Android va iOS uchun mavjud!",
+    "downloadAppStore": "App Store",
+    "downloadGooglePlay": "Google Play",
+    "downloadOnThe": "Yuklab oling",
+    "getItOn": "Oling",
+    "stats": {
+      "customers": "Mijozlar",
+      "delivery": "Daqiqa yetkazish",
+      "service": "Xizmat"
+    }
+  },
+  "features": {
+    "badge": "Bizning afzalliklarimiz",
+    "title": "Nima uchun bizni tanlaysiz?",
+    "description": "Bizning ilovamiz sizga eng yaxshi xizmatni taqdim etish uchun zamonaviy texnologiyalar bilan yaratilgan",
+    "fastDelivery": {
+      "title": "Tezkor Yetkazish",
+      "description": "30 daqiqada istalgan joyga yetkazib beramiz. AI-powered logistics tizimi orqali eng optimal yo'lni topamiz.",
+      "highlight": "Kafolatlangan tezlik"
+    },
+    "homeDelivery": {
+      "title": "Uyingizdayoq Qabul",
+      "description": "Mahsulotni to'g'ridan-to'g'ri sizning manzilingizga yetkazib beramiz. Real-time tracking bilan buyurtmangizni kuzating.",
+      "highlight": "GPS tracking"
+    },
+    "premiumQuality": {
+      "title": "Premium Sifat",
+      "description": "Eng yuqori sifatli xizmat va mijozlar mamnuniyati bizning asosiy maqsadimiz. 24/7 qo'llab-quvvatlash.",
+      "highlight": "100% kafolat"
+    },
+    "securePayment": {
+      "title": "Xavfsiz To'lov",
+      "description": "Bank kartalari, elektronik hamyonlar va naqd to'lov usullari"
+    },
+    "customerCommunity": {
+      "title": "Mijozlar Jamoasi",
+      "description": "50,000+ mamnun mijozlar va 4.8★ reyting App Store'da"
+    }
+  },
+  "howItWorks": {
+    "title": "Ilovani ishlatish juda oson",
+    "steps": {
+      "download": {
+        "title": "Ilovani yuklab oling",
+        "description": "App Store yoki Google Play'dan bepul yuklab oling"
+      },
+      "select": {
+        "title": "Maxsulotni tanlang",
+        "description": "Minglab mahsulot ichidan kerakligini toping"
+      },
+      "order": {
+        "title": "Buyurtma bering",
+        "description": "Bir necha daqiqada buyurtmangizni rasmiylashtirib oling"
+      }
+    }
+  },
+  "testimonials": {
+    "title": "Mijozlarimiz fikri",
+    "description": "Bizning xizmatlarimizdan foydalanayotgan mijozlar fikri",
+    "reviews": [
+      {
+        "text": "Juda tez va sifatli xizmat. Har doim vaqtida yetkazib berishadi. Rahmat!",
+        "name": "Aziza Karimova",
+        "role": "Doimiy mijoz"
+      },
+      {
+        "text": "Ilova juda qulay va ishlatish oson. Buyurtma berish bir necha daqiqa ichida amalga oshadi.",
+        "name": "Javohir Aliyev",
+        "role": "Hamkor"
+      },
+      {
+        "text": "Eng yaxshi yetkazib berish xizmati! Har doim sifatli va tez. Tavsiya qilaman.",
+        "name": "Madina Usmanova",
+        "role": "Mijoz"
+      }
+    ]
+  },
+  "contact": {
+    "title": "Biz bilan bog'laning",
+    "description": "Savollaringiz bormi? Biz sizga yordam berishga tayyormiz!",
+    "form": {
+      "name": "Ismingiz",
+      "namePlaceholder": "Ismingizni kiriting",
+      "email": "Email manzilingiz",
+      "emailPlaceholder": "email@example.com",
+      "phone": "Telefon raqami",
+      "phonePlaceholder": "+998 90 123 45 67",
+      "subject": "Mavzu",
+      "subjectPlaceholder": "Mavzuni tanlang",
+      "message": "Xabaringiz",
+      "messagePlaceholder": "Xabaringizni bu yerga yozing...",
+      "submit": "Xabar Yuborish",
+      "submitting": "Yuborilmoqda...",
+      "subjects": {
+        "general": "Umumiy savol",
+        "support": "Texnik yordam",
+        "partnership": "Hamkorlik",
+        "complaint": "Shikoyat",
+        "suggestion": "Taklif"
+      },
+      "messages": {
+        "success": "Muvaffaqiyat! Xabaringiz muvaffaqiyatli yuborildi. Tez orada siz bilan bog'lanamiz.",
+        "successTitle": "Muvaffaqiyat!",
+        "error": "Xato! Iltimos, qaytadan urinib ko'ring.",
+        "errorTitle": "Xato!",
+        "errorFallback": "Xato yuz berdi"
+      }
+    }
+  },
+  "cta": {
+    "title": "Hoziroq boshlab ko'ring!",
+    "description": "Bizning ilovamizni yuklab oling va tez yetkazib berish xizmatidan foydalaning",
+    "stats": "2 million+ downloads • 4.8★ rating"
+  },
+  "footer": {
+    "description": "Tez va ishonchli yetkazib berish xizmati. Sizning qulayligingiz bizning maqsadimiz.",
+    "company": "Kompaniya",
+    "help": "Yordam",
+    "contact": "Aloqa",
+    "address": "Toshkent, O'zbekiston",
+    "phone": "+998 90 123 45 67",
+    "email": "info@yolda.uz",
+    "copyright": "Barcha huquqlar himoyalangan.",
+    "privacy": "Maxfiylik siyosati",
+    "terms": "Foydalanish shartlari",
+    "links": {
+      "about": "Biz haqimizda",
+      "services": "Xizmatlar",
+      "news": "Yangiliklar",
+      "career": "Karyera",
+      "faq": "FAQ",
+      "support": "Qo'llab-quvvatlash",
+      "contact": "Aloqa",
+      "delivery": "Yetkazish"
+    }
+  },
+  "appScreenshots": {
+    "screens": {
+      "home": {
+        "title": "Bosh sahifa",
+        "description": "Kategoriyalar va mashhur taomlar"
+      },
+      "menu": {
+        "title": "Menyu",
+        "description": "Barcha taom va ichimliklar"
+      },
+      "order": {
+        "title": "Buyurtma",
+        "description": "Savatcha va to'lov"
+      },
+      "tracking": {
+        "title": "Kuzatuv",
+        "description": "Buyurtma holati"
+      }
+    }
+  },
+  "bubbles": {
+    "fast": {
+      "title": "Tezkor",
+      "subtitle": "30 min"
+    },
+    "quality": {
+      "title": "Sifat",
+      "subtitle": "Premium"
+    },
+    "secure": {
+      "title": "Xavfsiz",
+      "subtitle": "100%"
+    },
+    "support": {
+      "title": "Yordam",
+      "subtitle": "24/7"
+    }
+  }
+}

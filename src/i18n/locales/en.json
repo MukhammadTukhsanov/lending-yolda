@@ -1,0 +1,211 @@
+{
+  "navbar": {
+    "home": "Home",
+    "services": "Services",
+    "about": "About",
+    "contact": "Contact",
+    "partner": "Become Partner",
+    "partnerModal": {
+      "title": "Become a Partner!",
+      "subtitle": "Join our team!",
+      "description": "Partner with Yolda and grow your business. We offer you all the opportunities.",
+      "name": "Full Name",
+      "namePlaceholder": "Enter your name",
+      "phone": "Phone Number",
+      "phonePlaceholder": "+998 90 123 45 67",
+      "email": "Email Address",
+      "emailPlaceholder": "email@example.com",
+      "businessType": "Business Type",
+      "businessTypePlaceholder": "Select business type",
+      "businessTypes": {
+        "restaurant": "Restaurant",
+        "grocery": "Grocery Store",
+        "pharmacy": "Pharmacy",
+        "retail": "Retail",
+        "other": "Other"
+      },
+      "message": "Additional Information",
+      "messagePlaceholder": "Tell us briefly about your business...",
+      "cancel": "Cancel",
+      "submit": "Submit",
+      "successMessage": "Your application has been submitted! We will contact you soon."
+    }
+  },
+  "hero": {
+    "title": "Fast Delivery",
+    "subtitle": "Easy and Reliable",
+    "description": "We deliver any product in 30 minutes through our mobile app. Available for Android and iOS!",
+    "downloadAppStore": "App Store",
+    "downloadGooglePlay": "Google Play",
+    "downloadOnThe": "Download on the",
+    "getItOn": "Get it on",
+    "stats": {
+      "customers": "Customers",
+      "delivery": "Minute delivery",
+      "service": "Service"
+    }
+  },
+  "features": {
+    "badge": "Our Advantages",
+    "title": "Why choose us?",
+    "description": "Our app is built with modern technologies to provide you with the best service",
+    "fastDelivery": {
+      "title": "Fast Delivery",
+      "description": "We deliver anywhere in 30 minutes. Find the optimal route through AI-powered logistics system.",
+      "highlight": "Guaranteed speed"
+    },
+    "homeDelivery": {
+      "title": "Home Delivery",
+      "description": "We deliver products directly to your address. Track your order with real-time tracking.",
+      "highlight": "GPS tracking"
+    },
+    "premiumQuality": {
+      "title": "Premium Quality",
+      "description": "Highest quality service and customer satisfaction is our main goal. 24/7 support.",
+      "highlight": "100% guarantee"
+    },
+    "securePayment": {
+      "title": "Secure Payment",
+      "description": "Bank cards, electronic wallets and cash payment methods"
+    },
+    "customerCommunity": {
+      "title": "Customer Community",
+      "description": "50,000+ satisfied customers and 4.8★ rating on App Store"
+    }
+  },
+  "howItWorks": {
+    "title": "The app is very easy to use",
+    "steps": {
+      "download": {
+        "title": "Download the app",
+        "description": "Download for free from App Store or Google Play"
+      },
+      "select": {
+        "title": "Select product",
+        "description": "Find what you need among thousands of products"
+      },
+      "order": {
+        "title": "Place order",
+        "description": "Complete your order in a few minutes"
+      }
+    }
+  },
+  "testimonials": {
+    "title": "Our customers' opinion",
+    "description": "Reviews from customers using our services",
+    "reviews": [
+      {
+        "text": "Very fast and quality service. Always deliver on time. Thank you!",
+        "name": "Aziza Karimova",
+        "role": "Regular customer"
+      },
+      {
+        "text": "The app is very convenient and easy to use. Ordering is done in a few minutes.",
+        "name": "Javohir Aliyev",
+        "role": "Partner"
+      },
+      {
+        "text": "Best delivery service! Always quality and fast. I recommend.",
+        "name": "Madina Usmanova",
+        "role": "Customer"
+      }
+    ]
+  },
+  "contact": {
+    "title": "Contact us",
+    "description": "Have questions? We are ready to help you!",
+    "form": {
+      "name": "Your name",
+      "namePlaceholder": "Enter your name",
+      "email": "Your email",
+      "emailPlaceholder": "email@example.com",
+      "phone": "Phone number",
+      "phonePlaceholder": "+998 90 123 45 67",
+      "subject": "Subject",
+      "subjectPlaceholder": "Choose subject",
+      "message": "Your message",
+      "messagePlaceholder": "Write your message here...",
+      "submit": "Send Message",
+      "submitting": "Sending...",
+      "subjects": {
+        "general": "General question",
+        "support": "Technical support",
+        "partnership": "Partnership",
+        "complaint": "Complaint",
+        "suggestion": "Suggestion"
+      },
+      "messages": {
+        "success": "Success! Your message has been sent successfully. We will contact you soon.",
+        "successTitle": "Success!",
+        "error": "Error! Please try again.",
+        "errorTitle": "Error!",
+        "errorFallback": "An error occurred"
+      }
+    }
+  },
+  "cta": {
+    "title": "Get started now!",
+    "description": "Download our app and use fast delivery service",
+    "stats": "2 million+ downloads • 4.8★ rating"
+  },
+  "footer": {
+    "description": "Fast and reliable delivery service. Your convenience is our goal.",
+    "company": "Company",
+    "help": "Help",
+    "contact": "Contact",
+    "address": "Tashkent, Uzbekistan",
+    "phone": "+998 90 123 45 67",
+    "email": "info@yolda.uz",
+    "copyright": "All rights reserved.",
+    "privacy": "Privacy Policy",
+    "terms": "Terms of Service",
+    "links": {
+      "about": "About",
+      "services": "Services",
+      "news": "News",
+      "career": "Career",
+      "faq": "FAQ",
+      "support": "Support",
+      "contact": "Contact",
+      "delivery": "Delivery"
+    }
+  },
+  "appScreenshots": {
+    "screens": {
+      "home": {
+        "title": "Home",
+        "description": "Categories and popular dishes"
+      },
+      "menu": {
+        "title": "Menu",
+        "description": "All dishes and drinks"
+      },
+      "order": {
+        "title": "Order",
+        "description": "Cart and payment"
+      },
+      "tracking": {
+        "title": "Tracking",
+        "description": "Order status"
+      }
+    }
+  },
+  "bubbles": {
+    "fast": {
+      "title": "Fast",
+      "subtitle": "30 min"
+    },
+    "quality": {
+      "title": "Quality",
+      "subtitle": "Premium"
+    },
+    "secure": {
+      "title": "Secure",
+      "subtitle": "100%"
+    },
+    "support": {
+      "title": "Support",
+      "subtitle": "24/7"
+    }
+  }
+}

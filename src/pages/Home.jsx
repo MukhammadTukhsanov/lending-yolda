@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import Navbar from '../components/Navbar';
 import '../styles/landing.css';
 import { initScrollAnimations } from '../utils/animations';
@@ -6,6 +7,7 @@ import { initNavbarEffects } from '../utils/navbar';
 
 function Home() {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const { t } = useTranslation();
 
   // App screenshots for the slider
   const appScreenshots = [
@@ -50,7 +52,9 @@ function Home() {
       const messagesDiv = document.getElementById('form-messages');
 
       // Show loading state
-      submitBtn.innerHTML = '<i class="bi bi-arrow-clockwise me-2 spin"></i>Yuborilmoqda...';
+      submitBtn.innerHTML = `<i class="bi bi-arrow-clockwise me-2 spin"></i>${t(
+        'contact.form.submitting',
+      )}`;
       submitBtn.disabled = true;
 
       try {
@@ -65,25 +69,29 @@ function Home() {
           messagesDiv.innerHTML = `
             <div class="alert alert-success alert-dismissible fade show" role="alert">
               <i class="bi bi-check-circle-fill me-2"></i>
-              <strong>Muvaffaqiyat!</strong> Xabaringiz muvaffaqiyatli yuborildi. Tez orada siz bilan bog'lanamiz.
+              <strong>${t('contact.form.messages.successTitle')}</strong> ${t(
+            'contact.form.messages.success',
+          )}
               <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
             </div>
           `;
           form.reset();
         } else {
-          throw new Error(result.message || 'Xato yuz berdi');
+          throw new Error(result.message || t('contact.form.messages.errorFallback'));
         }
       } catch (error) {
         messagesDiv.innerHTML = `
           <div class="alert alert-danger alert-dismissible fade show" role="alert">
             <i class="bi bi-exclamation-triangle-fill me-2"></i>
-            <strong>Xato!</strong> ${error.message}. Iltimos, qaytadan urinib ko'ring.
+            <strong>${t('contact.form.messages.errorTitle')}</strong> ${error.message}. ${t(
+          'contact.form.messages.error',
+        )}
             <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
           </div>
         `;
       } finally {
         // Reset button
-        submitBtn.innerHTML = '<i class="bi bi-send-fill me-2"></i>Xabar Yuborish';
+        submitBtn.innerHTML = `<i class="bi bi-send-fill me-2"></i>${t('contact.form.submit')}`;
         submitBtn.disabled = false;
       }
     };
@@ -102,7 +110,7 @@ function Home() {
         contactForm.removeEventListener('submit', handleContactForm);
       }
     };
-  }, [appScreenshots.length]);
+  }, [appScreenshots.length, t]);
   return (
     <div>
       <Navbar />
@@ -124,14 +132,12 @@ function Home() {
           <div className='row align-items-center g-4'>
             <div className='col-lg-6 col-md-12 fade-in-up order-2 order-lg-1'>
               <h1 className='display-3 fw-bold mb-3 mb-md-4'>
-                Tez <span style={{ color: '#fff3e0' }}>Yetkazib Berish</span>
+                {t('hero.title')}
                 <br />
-                <span style={{ color: '#fff3e0' }}>Oson</span> va Ishonchli
+                <span style={{ color: '#fff3e0' }}>{t('hero.subtitle').split(' ')[0]}</span>{' '}
+                {t('hero.subtitle').split(' ').slice(1).join(' ')}
               </h1>
-              <p className='lead mb-3 mb-md-4 fs-5'>
-                Bizning mobil ilovamiz orqali istalgan mahsulotni 30 daqiqada yetkazib beramiz.
-                Android va iOS uchun mavjud!
-              </p>
+              <p className='lead mb-3 mb-md-4 fs-5'>{t('hero.description')}</p>
 
               {/* App Download Buttons */}
               <div className='d-flex flex-column flex-sm-row justify-content-center justify-content-lg-start flex-wrap gap-3 mb-4'>
@@ -142,8 +148,8 @@ function Home() {
                 >
                   <i className='bi bi-apple me-2 fs-4'></i>
                   <div className='text-start'>
-                    <div style={{ fontSize: '12px' }}>Download on the</div>
-                    <div className='fw-bold'>App Store</div>
+                    <div style={{ fontSize: '12px' }}>{t('hero.downloadOnThe')}</div>
+                    <div className='fw-bold'>{t('hero.downloadAppStore')}</div>
                   </div>
                 </a>
                 <a
@@ -153,8 +159,8 @@ function Home() {
                 >
                   <i className='bi bi-google-play me-2 fs-4'></i>
                   <div className='text-start'>
-                    <div style={{ fontSize: '12px' }}>Get it on</div>
-                    <div className='fw-bold'>Google Play</div>
+                    <div style={{ fontSize: '12px' }}>{t('hero.getItOn')}</div>
+                    <div className='fw-bold'>{t('hero.downloadGooglePlay')}</div>
                   </div>
                 </a>
               </div>
@@ -167,7 +173,7 @@ function Home() {
                       <i className='bi bi-people-fill'></i>
                     </div>
                     <h3 className='stat-number gradient-text fw-bold mb-1'>50K+</h3>
-                    <p className='stat-label mb-0'>Mijozlar</p>
+                    <p className='stat-label mb-0'>{t('hero.stats.customers')}</p>
                   </div>
                 </div>
                 <div className='col-lg-4 col-md-4 col-sm-4'>
@@ -176,7 +182,7 @@ function Home() {
                       <i className='bi bi-clock-fill'></i>
                     </div>
                     <h3 className='stat-number gradient-text fw-bold mb-1'>30</h3>
-                    <p className='stat-label mb-0'>Daqiqa yetkazish</p>
+                    <p className='stat-label mb-0'>{t('hero.stats.delivery')}</p>
                   </div>
                 </div>
                 <div className='col-lg-4 col-md-4 col-sm-4'>
@@ -185,7 +191,7 @@ function Home() {
                       <i className='bi bi-headset'></i>
                     </div>
                     <h3 className='stat-number gradient-text fw-bold mb-1'>24/7</h3>
-                    <p className='stat-label mb-0'>Xizmat</p>
+                    <p className='stat-label mb-0'>{t('hero.stats.service')}</p>
                   </div>
                 </div>
               </div>
@@ -227,31 +233,45 @@ function Home() {
                               {index === 0 && (
                                 <>
                                   <i className='bi bi-house-door fs-1 mb-3'></i>
-                                  <h5 className='fw-bold'>Bosh sahifa</h5>
+                                  <h5 className='fw-bold'>
+                                    {t('appScreenshots.screens.home.title')}
+                                  </h5>
                                   <p className='small opacity-75'>
-                                    Kategoriyalar va mashhur taomlar
+                                    {t('appScreenshots.screens.home.description')}
                                   </p>
                                 </>
                               )}
                               {index === 1 && (
                                 <>
                                   <i className='bi bi-grid fs-1 mb-3'></i>
-                                  <h5 className='fw-bold'>Menyu</h5>
-                                  <p className='small opacity-75'>Barcha taom va ichimliklar</p>
+                                  <h5 className='fw-bold'>
+                                    {t('appScreenshots.screens.menu.title')}
+                                  </h5>
+                                  <p className='small opacity-75'>
+                                    {t('appScreenshots.screens.menu.description')}
+                                  </p>
                                 </>
                               )}
                               {index === 2 && (
                                 <>
                                   <i className='bi bi-cart fs-1 mb-3'></i>
-                                  <h5 className='fw-bold'>Buyurtma</h5>
-                                  <p className='small opacity-75'>Savatcha va to\'lov</p>
+                                  <h5 className='fw-bold'>
+                                    {t('appScreenshots.screens.order.title')}
+                                  </h5>
+                                  <p className='small opacity-75'>
+                                    {t('appScreenshots.screens.order.description')}
+                                  </p>
                                 </>
                               )}
                               {index === 3 && (
                                 <>
                                   <i className='bi bi-geo-alt fs-1 mb-3'></i>
-                                  <h5 className='fw-bold'>Kuzatuv</h5>
-                                  <p className='small opacity-75'>Buyurtma holati</p>
+                                  <h5 className='fw-bold'>
+                                    {t('appScreenshots.screens.tracking.title')}
+                                  </h5>
+                                  <p className='small opacity-75'>
+                                    {t('appScreenshots.screens.tracking.description')}
+                                  </p>
                                 </>
                               )}
                             </div>
@@ -295,8 +315,8 @@ function Home() {
                         <i className='bi bi-lightning-charge fs-3'></i>
                       </div>
                       <div className='bubble-text'>
-                        <span className='bubble-title'>Tezkor</span>
-                        <span className='bubble-subtitle'>30 min</span>
+                        <span className='bubble-title'>{t('bubbles.fast.title')}</span>
+                        <span className='bubble-subtitle'>{t('bubbles.fast.subtitle')}</span>
                       </div>
                     </div>
                   </div>
@@ -309,8 +329,8 @@ function Home() {
                         <i className='bi bi-award fs-3'></i>
                       </div>
                       <div className='bubble-text'>
-                        <span className='bubble-title'>Sifat</span>
-                        <span className='bubble-subtitle'>Premium</span>
+                        <span className='bubble-title'>{t('bubbles.quality.title')}</span>
+                        <span className='bubble-subtitle'>{t('bubbles.quality.subtitle')}</span>
                       </div>
                     </div>
                   </div>
@@ -323,8 +343,8 @@ function Home() {
                         <i className='bi bi-shield-check fs-3'></i>
                       </div>
                       <div className='bubble-text'>
-                        <span className='bubble-title'>Xavfsiz</span>
-                        <span className='bubble-subtitle'>100%</span>
+                        <span className='bubble-title'>{t('bubbles.secure.title')}</span>
+                        <span className='bubble-subtitle'>{t('bubbles.secure.subtitle')}</span>
                       </div>
                     </div>
                   </div>
@@ -337,8 +357,8 @@ function Home() {
                         <i className='bi bi-headset fs-3'></i>
                       </div>
                       <div className='bubble-text'>
-                        <span className='bubble-title'>Yordam</span>
-                        <span className='bubble-subtitle'>24/7</span>
+                        <span className='bubble-title'>{t('bubbles.support.title')}</span>
+                        <span className='bubble-subtitle'>{t('bubbles.support.subtitle')}</span>
                       </div>
                     </div>
                   </div>
@@ -364,13 +384,10 @@ function Home() {
           <div className='row text-center mb-5 fade-in-up'>
             <div className='col-lg-8 mx-auto'>
               <div className='features-badge mb-3'>
-                <span className='badge-text'>Bizning afzalliklarimiz</span>
+                <span className='badge-text'>{t('features.badge')}</span>
               </div>
-              <h2 className='display-5 fw-bold mb-4 gradient-text'>Nima uchun bizni tanlaysiz?</h2>
-              <p className='lead text-muted fs-5'>
-                Bizning ilovamiz sizga eng yaxshi xizmatni taqdim etish uchun zamonaviy
-                texnologiyalar bilan yaratilgan
-              </p>
+              <h2 className='display-5 fw-bold mb-4 gradient-text'>{t('features.title')}</h2>
+              <p className='lead text-muted fs-5'>{t('features.description')}</p>
             </div>
           </div>
 
@@ -387,14 +404,11 @@ function Home() {
                   <div className='feature-number'>01</div>
                 </div>
                 <div className='feature-content'>
-                  <h5 className='feature-title'>Tezkor Yetkazish</h5>
-                  <p className='feature-description'>
-                    30 daqiqada istalgan joyga yetkazib beramiz. AI-powered logistics tizimi orqali
-                    eng optimal yo'lni topamiz.
-                  </p>
+                  <h5 className='feature-title'>{t('features.fastDelivery.title')}</h5>
+                  <p className='feature-description'>{t('features.fastDelivery.description')}</p>
                   <div className='feature-highlight'>
                     <i className='bi bi-check-circle-fill me-2'></i>
-                    <span>Kafolatlangan tezlik</span>
+                    <span>{t('features.fastDelivery.highlight')}</span>
                   </div>
                 </div>
               </div>
@@ -412,14 +426,11 @@ function Home() {
                   <div className='feature-number'>02</div>
                 </div>
                 <div className='feature-content'>
-                  <h5 className='feature-title'>Uyingizdayoq Qabul</h5>
-                  <p className='feature-description'>
-                    Mahsulotni to'g'ridan-to'g'ri sizning manzilingizga yetkazib beramiz. Real-time
-                    tracking bilan buyurtmangizni kuzating.
-                  </p>
+                  <h5 className='feature-title'>{t('features.homeDelivery.title')}</h5>
+                  <p className='feature-description'>{t('features.homeDelivery.description')}</p>
                   <div className='feature-highlight'>
                     <i className='bi bi-geo-alt-fill me-2'></i>
-                    <span>GPS tracking</span>
+                    <span>{t('features.homeDelivery.highlight')}</span>
                   </div>
                 </div>
               </div>
@@ -437,14 +448,11 @@ function Home() {
                   <div className='feature-number'>03</div>
                 </div>
                 <div className='feature-content'>
-                  <h5 className='feature-title'>Premium Sifat</h5>
-                  <p className='feature-description'>
-                    Eng yuqori sifatli xizmat va mijozlar mamnuniyati bizning asosiy maqsadimiz.
-                    24/7 qo'llab-quvvatlash.
-                  </p>
+                  <h5 className='feature-title'>{t('features.premiumQuality.title')}</h5>
+                  <p className='feature-description'>{t('features.premiumQuality.description')}</p>
                   <div className='feature-highlight'>
                     <i className='bi bi-shield-check-fill me-2'></i>
-                    <span>100% kafolat</span>
+                    <span>{t('features.premiumQuality.highlight')}</span>
                   </div>
                 </div>
               </div>
@@ -464,10 +472,8 @@ function Home() {
                   </div>
                 </div>
                 <div className='feature-content'>
-                  <h6 className='feature-title'>Xavfsiz To'lov</h6>
-                  <p className='feature-description'>
-                    Bank kartalari, elektronik hamyonlar va naqd to'lov usullari
-                  </p>
+                  <h6 className='feature-title'>{t('features.securePayment.title')}</h6>
+                  <p className='feature-description'>{t('features.securePayment.description')}</p>
                 </div>
               </div>
             </div>
@@ -483,9 +489,9 @@ function Home() {
                   </div>
                 </div>
                 <div className='feature-content'>
-                  <h6 className='feature-title'>Mijozlar Jamoasi</h6>
+                  <h6 className='feature-title'>{t('features.customerCommunity.title')}</h6>
                   <p className='feature-description'>
-                    50,000+ mamnun mijozlar va 4.8★ reyting App Store'da
+                    {t('features.customerCommunity.description')}
                   </p>
                 </div>
               </div>
@@ -499,7 +505,7 @@ function Home() {
         <div className='container'>
           <div className='row align-items-center'>
             <div className='col-lg-6'>
-              <h2 className='display-5 fw-bold mb-4'>Ilovani ishlatish juda oson</h2>
+              <h2 className='display-5 fw-bold mb-4'>{t('howItWorks.title')}</h2>
               <div className='row g-4'>
                 <div className='col-12'>
                   <div className='d-flex align-items-start'>
@@ -515,9 +521,9 @@ function Home() {
                       <span className='fw-bold'>1</span>
                     </div>
                     <div>
-                      <h5 className='fw-bold mb-2'>Ilovani yuklab oling</h5>
+                      <h5 className='fw-bold mb-2'>{t('howItWorks.steps.download.title')}</h5>
                       <p className='text-muted mb-0'>
-                        App Store yoki Google Play'dan bepul yuklab oling
+                        {t('howItWorks.steps.download.description')}
                       </p>
                     </div>
                   </div>
@@ -536,8 +542,8 @@ function Home() {
                       <span className='fw-bold'>2</span>
                     </div>
                     <div>
-                      <h5 className='fw-bold mb-2'>Maxsulotni tanlang</h5>
-                      <p className='text-muted mb-0'>Minglab mahsulot ichidan kerakligini toping</p>
+                      <h5 className='fw-bold mb-2'>{t('howItWorks.steps.select.title')}</h5>
+                      <p className='text-muted mb-0'>{t('howItWorks.steps.select.description')}</p>
                     </div>
                   </div>
                 </div>
@@ -555,10 +561,8 @@ function Home() {
                       <span className='fw-bold'>3</span>
                     </div>
                     <div>
-                      <h5 className='fw-bold mb-2'>Buyurtma bering</h5>
-                      <p className='text-muted mb-0'>
-                        Bir necha daqiqada buyurtmangizni rasmiylashtirib oling
-                      </p>
+                      <h5 className='fw-bold mb-2'>{t('howItWorks.steps.order.title')}</h5>
+                      <p className='text-muted mb-0'>{t('howItWorks.steps.order.description')}</p>
                     </div>
                   </div>
                 </div>
@@ -583,10 +587,8 @@ function Home() {
         <div className='container'>
           <div className='row text-center mb-5'>
             <div className='col-lg-8 mx-auto'>
-              <h2 className='display-5 fw-bold mb-3'>Mijozlarimiz fikri</h2>
-              <p className='lead text-muted'>
-                Bizning xizmatlarimizdan foydalanayotgan mijozlar fikri
-              </p>
+              <h2 className='display-5 fw-bold mb-3'>{t('testimonials.title')}</h2>
+              <p className='lead text-muted'>{t('testimonials.description')}</p>
             </div>
           </div>
 
@@ -600,9 +602,7 @@ function Home() {
                   <i className='bi bi-star-fill text-warning'></i>
                   <i className='bi bi-star-fill text-warning'></i>
                 </div>
-                <p className='mb-3'>
-                  "Juda tez va sifatli xizmat. Har doim vaqtida yetkazib berishadi. Rahmat!"
-                </p>
+                <p className='mb-3'>"{t('testimonials.reviews.0.text')}"</p>
                 <div className='d-flex align-items-center'>
                   <div
                     className='bg-primary rounded-circle d-flex align-items-center justify-content-center me-3'
@@ -615,8 +615,8 @@ function Home() {
                     <span className='text-white fw-bold'>A</span>
                   </div>
                   <div>
-                    <h6 className='mb-0 fw-bold'>Aziza Karimova</h6>
-                    <small className='text-muted'>Doimiy mijoz</small>
+                    <h6 className='mb-0 fw-bold'>{t('testimonials.reviews.0.name')}</h6>
+                    <small className='text-muted'>{t('testimonials.reviews.0.role')}</small>
                   </div>
                 </div>
               </div>
@@ -631,10 +631,7 @@ function Home() {
                   <i className='bi bi-star-fill text-warning'></i>
                   <i className='bi bi-star-fill text-warning'></i>
                 </div>
-                <p className='mb-3'>
-                  "Ilova juda qulay va ishlatish oson. Buyurtma berish bir necha daqiqa ichida
-                  amalga oshadi."
-                </p>
+                <p className='mb-3'>"{t('testimonials.reviews.1.text')}"</p>
                 <div className='d-flex align-items-center'>
                   <div
                     className='bg-success rounded-circle d-flex align-items-center justify-content-center me-3'
@@ -647,8 +644,8 @@ function Home() {
                     <span className='text-white fw-bold'>J</span>
                   </div>
                   <div>
-                    <h6 className='mb-0 fw-bold'>Javohir Aliyev</h6>
-                    <small className='text-muted'>Hamkor</small>
+                    <h6 className='mb-0 fw-bold'>{t('testimonials.reviews.1.name')}</h6>
+                    <small className='text-muted'>{t('testimonials.reviews.1.role')}</small>
                   </div>
                 </div>
               </div>
@@ -663,9 +660,7 @@ function Home() {
                   <i className='bi bi-star-fill text-warning'></i>
                   <i className='bi bi-star-fill text-warning'></i>
                 </div>
-                <p className='mb-3'>
-                  "Eng yaxshi yetkazib berish xizmati! Har doim sifatli va tez. Tavsiya qilaman."
-                </p>
+                <p className='mb-3'>"{t('testimonials.reviews.2.text')}"</p>
                 <div className='d-flex align-items-center'>
                   <div
                     className='bg-warning rounded-circle d-flex align-items-center justify-content-center me-3'
@@ -678,8 +673,8 @@ function Home() {
                     <span className='text-white fw-bold'>M</span>
                   </div>
                   <div>
-                    <h6 className='mb-0 fw-bold'>Madina Usmanova</h6>
-                    <small className='text-muted'>Mijoz</small>
+                    <h6 className='mb-0 fw-bold'>{t('testimonials.reviews.2.name')}</h6>
+                    <small className='text-muted'>{t('testimonials.reviews.2.role')}</small>
                   </div>
                 </div>
               </div>
@@ -693,10 +688,8 @@ function Home() {
         <div className='container'>
           <div className='row text-center mb-5'>
             <div className='col-lg-8 mx-auto'>
-              <h2 className='display-5 fw-bold mb-3 gradient-text'>Biz bilan bog'laning</h2>
-              <p className='lead text-muted'>
-                Savollaringiz bormi? Biz sizga yordam berishga tayyormiz!
-              </p>
+              <h2 className='display-5 fw-bold mb-3 gradient-text'>{t('contact.title')}</h2>
+              <p className='lead text-muted'>{t('contact.description')}</p>
             </div>
           </div>
 
@@ -709,7 +702,7 @@ function Home() {
                       <div className='form-group'>
                         <label htmlFor='name' className='form-label fw-semibold'>
                           <i className='bi bi-person-fill me-2 text-primary'></i>
-                          Ismingiz *
+                          {t('contact.form.name')} *
                         </label>
                         <input
                           type='text'
@@ -717,7 +710,7 @@ function Home() {
                           id='name'
                           name='name'
                           required
-                          placeholder='Ismingizni kiriting'
+                          placeholder={t('contact.form.namePlaceholder')}
                           style={{
                             borderRadius: '12px',
                             border: '2px solid #e9ecef',
@@ -730,7 +723,7 @@ function Home() {
                       <div className='form-group'>
                         <label htmlFor='email' className='form-label fw-semibold'>
                           <i className='bi bi-envelope-fill me-2 text-primary'></i>
-                          Email manzilingiz *
+                          {t('contact.form.email')} *
                         </label>
                         <input
                           type='email'
@@ -738,7 +731,7 @@ function Home() {
                           id='email'
                           name='email'
                           required
-                          placeholder='email@example.com'
+                          placeholder={t('contact.form.emailPlaceholder')}
                           style={{
                             borderRadius: '12px',
                             border: '2px solid #e9ecef',
@@ -751,14 +744,14 @@ function Home() {
                       <div className='form-group'>
                         <label htmlFor='phone' className='form-label fw-semibold'>
                           <i className='bi bi-telephone-fill me-2 text-primary'></i>
-                          Telefon raqami
+                          {t('contact.form.phone')}
                         </label>
                         <input
                           type='tel'
                           className='form-control form-control-lg'
                           id='phone'
                           name='phone'
-                          placeholder='+998 90 123 45 67'
+                          placeholder={t('contact.form.phonePlaceholder')}
                           style={{
                             borderRadius: '12px',
                             border: '2px solid #e9ecef',
@@ -771,7 +764,7 @@ function Home() {
                       <div className='form-group'>
                         <label htmlFor='subject' className='form-label fw-semibold'>
                           <i className='bi bi-chat-dots-fill me-2 text-primary'></i>
-                          Mavzu *
+                          {t('contact.form.subject')} *
                         </label>
                         <select
                           className='form-select form-select-lg'
@@ -784,12 +777,16 @@ function Home() {
                             transition: 'all 0.3s ease',
                           }}
                         >
-                          <option value=''>Mavzuni tanlang</option>
-                          <option value='Umumiy savol'>Umumiy savol</option>
-                          <option value='Texnik yordam'>Texnik yordam</option>
-                          <option value='Hamkorlik'>Hamkorlik</option>
-                          <option value='Shikoyat'>Shikoyat</option>
-                          <option value='Taklif'>Taklif</option>
+                          <option value=''>{t('contact.form.subjectPlaceholder')}</option>
+                          <option value='general'>{t('contact.form.subjects.general')}</option>
+                          <option value='support'>{t('contact.form.subjects.support')}</option>
+                          <option value='partnership'>
+                            {t('contact.form.subjects.partnership')}
+                          </option>
+                          <option value='complaint'>{t('contact.form.subjects.complaint')}</option>
+                          <option value='suggestion'>
+                            {t('contact.form.subjects.suggestion')}
+                          </option>
                         </select>
                       </div>
                     </div>
@@ -797,7 +794,7 @@ function Home() {
                       <div className='form-group'>
                         <label htmlFor='message' className='form-label fw-semibold'>
                           <i className='bi bi-chat-text-fill me-2 text-primary'></i>
-                          Xabaringiz *
+                          {t('contact.form.message')} *
                         </label>
                         <textarea
                           className='form-control form-control-lg'
@@ -805,7 +802,7 @@ function Home() {
                           name='message'
                           rows='5'
                           required
-                          placeholder='Xabaringizni bu yerga yozing...'
+                          placeholder={t('contact.form.messagePlaceholder')}
                           style={{
                             borderRadius: '12px',
                             border: '2px solid #e9ecef',
@@ -830,7 +827,7 @@ function Home() {
                         }}
                       >
                         <i className='bi bi-send-fill me-2'></i>
-                        Xabar Yuborish
+                        {t('contact.form.submit')}
                       </button>
                     </div>
                   </div>
@@ -855,10 +852,8 @@ function Home() {
         <div className='container text-center'>
           <div className='row'>
             <div className='col-lg-8 mx-auto'>
-              <h2 className='display-5 fw-bold mb-4'>Hoziroq boshlab ko'ring!</h2>
-              <p className='lead mb-4'>
-                Bizning ilovamizni yuklab oling va tez yetkazib berish xizmatidan foydalaning
-              </p>
+              <h2 className='display-5 fw-bold mb-4'>{t('cta.title')}</h2>
+              <p className='lead mb-4'>{t('cta.description')}</p>
 
               <div className='d-flex justify-content-center flex-wrap gap-3 mb-4'>
                 <a
@@ -868,8 +863,8 @@ function Home() {
                 >
                   <i className='bi bi-apple me-2 fs-4'></i>
                   <div className='text-start'>
-                    <div style={{ fontSize: '12px', color: '#666' }}>Download on the</div>
-                    <div className='fw-bold text-dark'>App Store</div>
+                    <div style={{ fontSize: '12px', color: '#666' }}>{t('hero.downloadOnThe')}</div>
+                    <div className='fw-bold text-dark'>{t('hero.downloadAppStore')}</div>
                   </div>
                 </a>
                 <a
@@ -879,14 +874,14 @@ function Home() {
                 >
                   <i className='bi bi-google-play me-2 fs-4'></i>
                   <div className='text-start'>
-                    <div style={{ fontSize: '12px', color: '#666' }}>Get it on</div>
-                    <div className='fw-bold text-dark'>Google Play</div>
+                    <div style={{ fontSize: '12px', color: '#666' }}>{t('hero.getItOn')}</div>
+                    <div className='fw-bold text-dark'>{t('hero.downloadGooglePlay')}</div>
                   </div>
                 </a>
               </div>
 
               <p className='mb-0'>
-                <small>2 million+ downloads • 4.8★ rating</small>
+                <small>{t('cta.stats')}</small>
               </p>
             </div>
           </div>
@@ -904,9 +899,7 @@ function Home() {
                 height='60'
                 className='mb-3'
               />
-              <p className='mb-3'>
-                Tez va ishonchli yetkazib berish xizmati. Sizning qulayligingiz bizning maqsadimiz.
-              </p>
+              <p className='mb-3'>{t('footer.description')}</p>
               <div className='d-flex gap-3'>
                 <a
                   href='https://facebook.com'
@@ -944,70 +937,70 @@ function Home() {
             </div>
 
             <div className='col-lg-2 col-md-3'>
-              <h6 className='fw-bold mb-3'>Kompaniya</h6>
+              <h6 className='fw-bold mb-3'>{t('footer.company')}</h6>
               <ul className='list-unstyled'>
                 <li className='mb-2'>
                   <button className='btn btn-link text-light text-decoration-none p-0 border-0'>
-                    Biz haqimizda
+                    {t('footer.links.about')}
                   </button>
                 </li>
                 <li className='mb-2'>
                   <button className='btn btn-link text-light text-decoration-none p-0 border-0'>
-                    Xizmatlar
+                    {t('footer.links.services')}
                   </button>
                 </li>
                 <li className='mb-2'>
                   <button className='btn btn-link text-light text-decoration-none p-0 border-0'>
-                    Yangiliklar
+                    {t('footer.links.news')}
                   </button>
                 </li>
                 <li className='mb-2'>
                   <button className='btn btn-link text-light text-decoration-none p-0 border-0'>
-                    Karyera
+                    {t('footer.links.career')}
                   </button>
                 </li>
               </ul>
             </div>
 
             <div className='col-lg-2 col-md-3'>
-              <h6 className='fw-bold mb-3'>Yordam</h6>
+              <h6 className='fw-bold mb-3'>{t('footer.help')}</h6>
               <ul className='list-unstyled'>
                 <li className='mb-2'>
                   <button className='btn btn-link text-light text-decoration-none p-0 border-0'>
-                    FAQ
+                    {t('footer.links.faq')}
                   </button>
                 </li>
                 <li className='mb-2'>
                   <button className='btn btn-link text-light text-decoration-none p-0 border-0'>
-                    Qo'llab-quvvatlash
+                    {t('footer.links.support')}
                   </button>
                 </li>
                 <li className='mb-2'>
                   <button className='btn btn-link text-light text-decoration-none p-0 border-0'>
-                    Aloqa
+                    {t('footer.links.contact')}
                   </button>
                 </li>
                 <li className='mb-2'>
                   <button className='btn btn-link text-light text-decoration-none p-0 border-0'>
-                    Yetkazish
+                    {t('footer.links.delivery')}
                   </button>
                 </li>
               </ul>
             </div>
 
             <div className='col-lg-4 col-md-6'>
-              <h6 className='fw-bold mb-3'>Aloqa</h6>
+              <h6 className='fw-bold mb-3'>{t('footer.contact')}</h6>
               <div className='mb-2'>
                 <i className='bi bi-geo-alt me-2'></i>
-                Toshkent, O'zbekiston
+                {t('footer.address')}
               </div>
               <div className='mb-2'>
                 <i className='bi bi-telephone me-2'></i>
-                +998 90 123 45 67
+                {t('footer.phone')}
               </div>
               <div className='mb-2'>
                 <i className='bi bi-envelope me-2'></i>
-                info@yolda.uz
+                {t('footer.email')}
               </div>
             </div>
           </div>
@@ -1016,14 +1009,14 @@ function Home() {
 
           <div className='row align-items-center'>
             <div className='col-md-6'>
-              <p className='mb-0'>&copy; 2025 Yolda. Barcha huquqlar himoyalangan.</p>
+              <p className='mb-0'>&copy; 2025 Yolda. {t('footer.copyright')}</p>
             </div>
             <div className='col-md-6 text-md-end'>
               <button className='btn btn-link text-light text-decoration-none me-3 p-0 border-0'>
-                Maxfiylik siyosati
+                {t('footer.privacy')}
               </button>
               <button className='btn btn-link text-light text-decoration-none p-0 border-0'>
-                Foydalanish shartlari
+                {t('footer.terms')}
               </button>
             </div>
           </div>

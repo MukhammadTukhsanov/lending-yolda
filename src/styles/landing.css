@@ -125,7 +125,16 @@
     padding: 60px 0;
   }
 
-  /* Adjust bubbles for mobile - closer to phone */
+  /* Hide phone mockup and bubbles on mobile */
+  .phone-mockup {
+    display: none !important;
+  }
+
+  .floating-bubbles {
+    display: none !important;
+  }
+
+  /* Keep bubble styles for when they might be needed */
   .modern-bubble {
     padding: 10px 14px;
     border-radius: 14px;
@@ -138,26 +147,6 @@
 
   .bubble-icon i {
     font-size: 1.1rem !important;
-  }
-
-  .bubble-1 {
-    top: 12%;
-    left: -8%;
-  }
-
-  .bubble-2 {
-    top: 38%;
-    right: -10%;
-  }
-
-  .bubble-3 {
-    bottom: 38%;
-    left: -5%;
-  }
-
-  .bubble-4 {
-    bottom: 12%;
-    right: -8%;
   }
 
   /* Modern Features Mobile */
@@ -782,9 +771,10 @@
 }
 
 .modern-bubble:hover {
-  transform: translateY(-8px) scale(1.05);
-  box-shadow: 0 16px 48px rgba(255, 149, 86, 0.25), 0 8px 24px rgba(0, 0, 0, 0.15),
-    inset 0 1px 0 rgba(255, 255, 255, 0.9);
+  transform: translateY(-15px) scale(1.08) rotate(2deg);
+  box-shadow: 0 25px 60px rgba(255, 149, 86, 0.35), 0 15px 35px rgba(0, 0, 0, 0.2),
+    inset 0 2px 0 rgba(255, 255, 255, 1), 0 0 0 2px rgba(255, 149, 86, 0.2);
+  border-color: rgba(255, 149, 86, 0.4);
 }
 
 /* Bubble connection effect */
@@ -822,7 +812,8 @@
 
 .modern-bubble:hover::after {
   opacity: 1;
-  transform: scale(1.5);
+  transform: scale(2);
+  box-shadow: 0 0 20px rgba(255, 149, 86, 0.6);
 }
 
 .bubble-glow {
@@ -840,8 +831,9 @@
 }
 
 .modern-bubble:hover .bubble-glow {
-  opacity: 0.6;
-  animation: glowPulse 2s ease-in-out infinite;
+  opacity: 0.8;
+  animation: glowPulse 1.5s ease-in-out infinite;
+  filter: blur(12px);
 }
 
 .bubble-content {
@@ -862,6 +854,14 @@
   border-radius: 50%;
   color: white;
   box-shadow: 0 4px 12px rgba(255, 149, 86, 0.3);
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.modern-bubble:hover .bubble-icon {
+  transform: scale(1.15) rotate(10deg);
+  box-shadow: 0 8px 25px rgba(255, 149, 86, 0.5), 0 0 0 3px rgba(255, 255, 255, 0.8),
+    0 0 0 6px rgba(255, 149, 86, 0.2);
+  background: linear-gradient(135deg, #ff724c 0%, #ff4f42 100%);
 }
 
 .bubble-text {
@@ -875,6 +875,7 @@
   font-size: 14px;
   color: #2c2c2c;
   line-height: 1;
+  transition: all 0.3s ease;
 }
 
 .bubble-subtitle {
@@ -882,6 +883,19 @@
   font-size: 12px;
   color: #ff9556;
   line-height: 1;
+  transition: all 0.3s ease;
+}
+
+.modern-bubble:hover .bubble-title {
+  color: #1a1a1a;
+  transform: translateX(3px);
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.modern-bubble:hover .bubble-subtitle {
+  color: #ff724c;
+  transform: translateX(3px);
+  font-weight: 700;
 }
 
 /* Bubble Positioning */
@@ -1453,6 +1467,36 @@
   }
   100% {
     transform: rotate(360deg);
+  }
+}
+
+/* Modern bubble floating animation */
+@keyframes modernFloat {
+  0%,
+  100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  25% {
+    transform: translateY(-10px) rotate(1deg);
+  }
+  50% {
+    transform: translateY(-5px) rotate(-1deg);
+  }
+  75% {
+    transform: translateY(-15px) rotate(0.5deg);
+  }
+}
+
+/* Bubble glow pulse animation */
+@keyframes glowPulse {
+  0%,
+  100% {
+    opacity: 0.8;
+    filter: blur(12px);
+  }
+  50% {
+    opacity: 1;
+    filter: blur(15px);
   }
 }
 
