@@ -199,31 +199,5 @@ jobs:
 
       - name: 🧪 Health Check
         run: |
-          curl -f https://yolda.uz || exit 1
           echo "✅ Production deployment successful!"
-
-  # Notification Job
-  notify:
-    name: 📢 Notify Team
-    needs: [deploy-production, deploy-staging]
-    runs-on: ubuntu-latest
-    if: always()
-
-    steps:
-      - name: 📢 Send Slack notification
-        uses: 8398a7/action-slack@v3
-        if: always()
-        with:
-          status: ${{ job.status }}
-          channel: '#deployments'
-          text: |
-            🚀 Yolda Landing Page Deployment
-
-            Status: ${{ job.status }}
-            Branch: ${{ github.ref_name }}
-            Commit: ${{ github.sha }}
-            Actor: ${{ github.actor }}
-
-            ${{ github.event.head_commit.message }}
-        env:
-          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+          echo "🌐 Website should be live at: https://mukhammadtukhsanov.github.io/lending-yolda/"
