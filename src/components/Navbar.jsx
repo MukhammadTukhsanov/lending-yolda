@@ -52,7 +52,7 @@ function Navbar() {
             onClick={() => scrollToSection('hero')}
           >
             <img
-              src={'/logo.svg'}
+              src={`${process.env.PUBLIC_URL}/logo.svg`}
               alt='Yolda Logo'
               height={45}
               className='d-inline-block align-text-top me-2'

@@ -12,22 +12,22 @@ function Home() {
     {
       src: '/screenshots/home-screen.jpg',
       alt: 'Home Screen',
-      fallback: '/home-banner.svg',
+      fallback: `${process.env.PUBLIC_URL}/home-banner.svg`,
     },
     {
       src: '/screenshots/menu-screen.jpg',
       alt: 'Menu Screen',
-      fallback: '/home-banner.svg',
+      fallback: `${process.env.PUBLIC_URL}/home-banner.svg`,
     },
     {
       src: '/screenshots/order-screen.jpg',
       alt: 'Order Screen',
-      fallback: '/home-banner.svg',
+      fallback: `${process.env.PUBLIC_URL}/home-banner.svg`,
     },
     {
       src: '/screenshots/tracking-screen.jpg',
       alt: 'Order Tracking',
-      fallback: '/home-banner.svg',
+      fallback: `${process.env.PUBLIC_URL}/home-banner.svg`,
     },
   ];
 
@@ -567,7 +567,7 @@ function Home() {
             <div className='col-lg-6 text-center'>
               <div className='position-relative'>
                 <img
-                  src='/home-banner.svg'
+                  src={`${process.env.PUBLIC_URL}/home-banner.svg`}
                   alt='App Screenshot'
                   className='img-fluid'
                   style={{ maxHeight: '500px' }}
@@ -898,7 +898,12 @@ function Home() {
         <div className='container'>
           <div className='row g-4'>
             <div className='col-lg-4'>
-              <img src='/logo.svg' alt='Logo' height='60' className='mb-3' />
+              <img
+                src={`${process.env.PUBLIC_URL}/logo.svg`}
+                alt='Logo'
+                height='60'
+                className='mb-3'
+              />
               <p className='mb-3'>
                 Tez va ishonchli yetkazib berish xizmati. Sizning qulayligingiz bizning maqsadimiz.
               </p>
