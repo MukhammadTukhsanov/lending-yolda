@@ -36,7 +36,12 @@ jobs:
           PUBLIC_URL: /lending-yolda
           REACT_APP_ENVIRONMENT: production
           
-      - name: 📊 Generate Site Statistics
+      - name: � Disable Jekyll
+        run: |
+          touch build/.nojekyll
+          echo "Disabled Jekyll processing for GitHub Pages"
+          
+      - name: �📊 Generate Site Statistics
         run: |
           echo "Generating deployment statistics..."
           mkdir -p build/admin
