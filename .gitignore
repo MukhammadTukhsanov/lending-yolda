@@ -18,6 +18,24 @@
 .env.test.local
 .env.production.local
 
+# PHP configuration files (contain sensitive data)
+/public/api/email-config.php
+/public/api/email_log.txt
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS files
+Thumbs.db
+.DS_Store
+
+# Logs
+logs
+*.log
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+lerna-debug.log*

@@ -1,13 +1,40 @@
 {
   "name": "lending-yolda",
-  "version": "0.1.0",
+  "version": "1.0.0",
+  "description": "Modern, responsive landing page for Yolda delivery service with PHP contact form backend",
   "private": true,
+  "author": {
+    "name": "Yolda Team",
+    "email": "info@yolda.uz",
+    "url": "https://yolda.uz"
+  },
+  "homepage": "https://mukhammadtukhsanov.github.io/lending-yolda",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yourusername/lending-yolda.git"
+  },
+  "bugs": {
+    "url": "https://github.com/yourusername/lending-yolda/issues"
+  },
+  "keywords": [
+    "react",
+    "landing-page",
+    "delivery-service",
+    "responsive-design",
+    "contact-form",
+    "php-backend",
+    "bootstrap",
+    "yolda"
+  ],
   "dependencies": {
     "@testing-library/dom": "^10.4.0",
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^16.3.0",
     "@testing-library/user-event": "^13.5.0",
+    "bootstrap": "^5.3.7",
+    "bootstrap-icons": "^1.13.1",
     "react": "^19.1.0",
+    "react-bootstrap": "^2.10.10",
     "react-dom": "^19.1.0",
     "react-scripts": "5.0.1",
     "web-vitals": "^2.1.4"
@@ -16,7 +43,16 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "test:coverage": "react-scripts test --coverage --watchAll=false",
+    "test:ci": "CI=true react-scripts test --coverage --watchAll=false",
+    "eject": "react-scripts eject",
+    "build:staging": "REACT_APP_ENVIRONMENT=staging npm run build",
+    "build:production": "REACT_APP_ENVIRONMENT=production npm run build",
+    "analyze": "npm run build && npx serve -s build",
+    "lint": "eslint src/**/*.{js,jsx} --fix",
+    "format": "prettier --write src/**/*.{js,jsx,css,md}",
+    "precommit": "npm run lint && npm run test:ci",
+    "postbuild": "echo 'Build completed successfully! 🚀'"
   },
   "eslintConfig": {
     "extends": [

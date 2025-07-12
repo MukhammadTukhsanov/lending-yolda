@@ -1,0 +1,79 @@
+# Security Configuration for Yolda API
+
+# Protect sensitive files and enhance security
+
+# Protect configuration file
+
+<Files "email-config.php">
+Order Allow,Deny
+Deny from all
+</Files>
+
+# Protect log files
+
+<Files "\*.txt">
+Order Allow,Deny
+Deny from all
+</Files>
+
+# Enable CORS for contact form (update with your domain)
+
+<IfModule mod_headers.c>
+    Header always set Access-Control-Allow-Origin "*"
+    Header always set Access-Control-Allow-Methods "POST, OPTIONS"
+    Header always set Access-Control-Allow-Headers "Content-Type"
+    Header always set X-Content-Type-Options "nosniff"
+    Header always set X-Frame-Options "DENY"
+    Header always set X-XSS-Protection "1; mode=block"
+</IfModule>
+
+# Prevent direct access to PHP files except send-email.php
+
+<Files "\*.php">
+Order Allow,Deny
+Deny from all
+</Files>
+
+<Files "send-email.php">
+Order Allow,Deny
+Allow from all
+</Files>
+
+# Security headers
+
+<IfModule mod_headers.c>
+    Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains"
+    Header always set Referrer-Policy "strict-origin-when-cross-origin"
+    Header always set Permissions-Policy "geolocation=(), microphone=(), camera=()"
+</IfModule>
+
+# Prevent information disclosure
+
+ServerTokens Prod
+ServerSignature Off
+
+# Block common attack patterns
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    
+    # Block SQL injection attempts
+    RewriteCond %{QUERY_STRING} (\<|%3C).*script.*(\>|%3E) [NC,OR]
+    RewriteCond %{QUERY_STRING} GLOBALS(=|\[|\%[0-9A-Z]{0,2}) [OR]
+    RewriteCond %{QUERY_STRING} _REQUEST(=|\[|\%[0-9A-Z]{0,2}) [OR]
+    RewriteCond %{QUERY_STRING} \b(SELECT|UNION|INSERT|UPDATE|DELETE|DROP|CREATE|ALTER)\b [NC]
+    RewriteRule ^(.*)$ - [F,L]
+    
+    # Block file injection attempts
+    RewriteCond %{REQUEST_URI} \b(\.\.\/|\.\.\\) [NC,OR]
+    RewriteCond %{REQUEST_URI} \b(eval\(|base64_decode|gzinflate) [NC,OR]
+    RewriteCond %{REQUEST_URI} \b(php://|file://|ftp://|zlib://) [NC]
+    RewriteRule ^(.*)$ - [F,L]
+</IfModule>
+
+# File upload restrictions
+
+<IfModule mod_mime.c>
+    # Prevent execution of uploaded scripts
+    RemoveHandler .php .phtml .php3 .php4 .php5 .php6 .phps .cgi .pl .asp .aspx .shtml .shtm .fcgi
+</IfModule>

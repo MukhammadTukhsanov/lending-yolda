@@ -1,0 +1,229 @@
+name: 🚀 Deploy Yolda Landing Page
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main]
+
+jobs:
+  # Test and Build Job
+  build-and-test:
+    name: 🔍 Build & Test
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [18.x, 20.x]
+
+    steps:
+      - name: 📥 Checkout code
+        uses: actions/checkout@v4
+
+      - name: 🔧 Setup Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
+
+      - name: 📦 Install dependencies
+        run: npm ci
+
+      - name: 🧪 Run tests
+        run: npm test -- --coverage --watchAll=false
+
+      - name: 🔨 Build application
+        run: npm run build
+
+      - name: 📊 Upload coverage reports
+        uses: codecov/codecov-action@v3
+        if: matrix.node-version == '20.x'
+
+      - name: 💾 Cache build
+        uses: actions/cache@v3
+        if: matrix.node-version == '20.x'
+        with:
+          path: build
+          key: build-${{ github.sha }}
+
+  # Code Quality Job
+  code-quality:
+    name: 🔍 Code Quality
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 📥 Checkout code
+        uses: actions/checkout@v4
+
+      - name: 🔧 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.x'
+          cache: 'npm'
+
+      - name: 📦 Install dependencies
+        run: npm ci
+
+      - name: 🎨 Check code formatting
+        run: npx prettier --check src/
+
+      - name: 🔍 Run ESLint
+        run: npx eslint src/ --ext .js,.jsx,.ts,.tsx
+
+  # Security Scan Job
+  security-scan:
+    name: 🛡️ Security Scan
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 📥 Checkout code
+        uses: actions/checkout@v4
+
+      - name: 🔧 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.x'
+          cache: 'npm'
+
+      - name: 📦 Install dependencies
+        run: npm ci
+
+      - name: 🔒 Run security audit
+        run: npm audit --audit-level moderate
+
+      - name: 🛡️ Run CodeQL Analysis
+        uses: github/codeql-action/init@v2
+        with:
+          languages: javascript
+
+      - name: 🔍 Perform CodeQL Analysis
+        uses: github/codeql-action/analyze@v2
+
+  # Deploy to Staging (develop branch)
+  deploy-staging:
+    name: 🚀 Deploy to Staging
+    needs: [build-and-test, code-quality, security-scan]
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/develop'
+
+    environment:
+      name: staging
+      url: https://staging.yolda.uz
+
+    steps:
+      - name: 📥 Checkout code
+        uses: actions/checkout@v4
+
+      - name: 🔧 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.x'
+          cache: 'npm'
+
+      - name: 📦 Install dependencies
+        run: npm ci
+
+      - name: 🔨 Build for staging
+        run: npm run build
+        env:
+          REACT_APP_API_URL: https://staging.yolda.uz/api
+          REACT_APP_ENVIRONMENT: staging
+
+      - name: 🚀 Deploy to Staging Server
+        uses: appleboy/scp-action@v0.1.4
+        with:
+          host: ${{ secrets.STAGING_HOST }}
+          username: ${{ secrets.STAGING_USERNAME }}
+          key: ${{ secrets.STAGING_SSH_KEY }}
+          source: 'build/*,public/api/*'
+          target: ${{ secrets.STAGING_PATH }}
+          rm: true
+
+  # Deploy to Production (main branch)
+  deploy-production:
+    name: 🚀 Deploy to Production
+    needs: [build-and-test, code-quality, security-scan]
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+
+    environment:
+      name: production
+      url: https://yolda.uz
+
+    steps:
+      - name: 📥 Checkout code
+        uses: actions/checkout@v4
+
+      - name: 🔧 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.x'
+          cache: 'npm'
+
+      - name: 📦 Install dependencies
+        run: npm ci
+
+      - name: 🔨 Build for production
+        run: npm run build
+        env:
+          REACT_APP_API_URL: https://yolda.uz/api
+          REACT_APP_ENVIRONMENT: production
+
+      - name: 📄 Generate deployment info
+        run: |
+          echo "Deployment Date: $(date)" > build/deploy-info.txt
+          echo "Git Commit: ${{ github.sha }}" >> build/deploy-info.txt
+          echo "Branch: ${{ github.ref_name }}" >> build/deploy-info.txt
+          echo "Deployed by: ${{ github.actor }}" >> build/deploy-info.txt
+
+      - name: 🚀 Deploy to Production Server
+        uses: appleboy/scp-action@v0.1.4
+        with:
+          host: ${{ secrets.PRODUCTION_HOST }}
+          username: ${{ secrets.PRODUCTION_USERNAME }}
+          key: ${{ secrets.PRODUCTION_SSH_KEY }}
+          source: 'build/*,public/api/*'
+          target: ${{ secrets.PRODUCTION_PATH }}
+          rm: true
+
+      - name: 🔄 Restart web server
+        uses: appleboy/ssh-action@v0.1.5
+        with:
+          host: ${{ secrets.PRODUCTION_HOST }}
+          username: ${{ secrets.PRODUCTION_USERNAME }}
+          key: ${{ secrets.PRODUCTION_SSH_KEY }}
+          script: |
+            sudo systemctl reload apache2
+            sudo chown -R www-data:www-data ${{ secrets.PRODUCTION_PATH }}
+            sudo chmod 644 ${{ secrets.PRODUCTION_PATH }}/api/*.php
+
+      - name: 🧪 Health Check
+        run: |
+          curl -f https://yolda.uz || exit 1
+          echo "✅ Production deployment successful!"
+
+  # Notification Job
+  notify:
+    name: 📢 Notify Team
+    needs: [deploy-production, deploy-staging]
+    runs-on: ubuntu-latest
+    if: always()
+
+    steps:
+      - name: 📢 Send Slack notification
+        uses: 8398a7/action-slack@v3
+        if: always()
+        with:
+          status: ${{ job.status }}
+          channel: '#deployments'
+          text: |
+            🚀 Yolda Landing Page Deployment
+
+            Status: ${{ job.status }}
+            Branch: ${{ github.ref_name }}
+            Commit: ${{ github.sha }}
+            Actor: ${{ github.actor }}
+
+            ${{ github.event.head_commit.message }}
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
