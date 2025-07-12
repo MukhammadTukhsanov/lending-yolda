@@ -2,7 +2,7 @@ name: 🚀 Deploy Yolda Website with Visualization
 
 on:
   push:
-    branches: [ main ]
+    branches: [main]
   workflow_dispatch:
 
 permissions:
@@ -11,7 +11,7 @@ permissions:
   id-token: write
 
 concurrency:
-  group: "pages"
+  group: 'pages'
   cancel-in-progress: false
 
 jobs:
@@ -20,32 +20,32 @@ jobs:
     steps:
       - name: 📥 Checkout Repository
         uses: actions/checkout@v4
-        
+
       - name: 🔧 Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '20'
           cache: 'npm'
-          
+
       - name: 📦 Install Dependencies
         run: npm ci
-        
+
       - name: 🔨 Build Application
         run: npm run build
         env:
           PUBLIC_URL: /lending-yolda
           REACT_APP_ENVIRONMENT: production
-          
+
       - name: � Disable Jekyll
         run: |
           touch build/.nojekyll
           echo "Disabled Jekyll processing for GitHub Pages"
-          
+
       - name: �📊 Generate Site Statistics
         run: |
           echo "Generating deployment statistics..."
           mkdir -p build/admin
-          
+
           # Create admin dashboard
           cat > build/admin/index.html << 'EOF'
           <!DOCTYPE html>
@@ -130,10 +130,10 @@ jobs:
           </body>
           </html>
           EOF
-          
+
       - name: 📄 Setup Pages
         uses: actions/configure-pages@v4
-        
+
       - name: 📤 Upload Artifact
         uses: actions/upload-pages-artifact@v3
         with:
@@ -149,7 +149,7 @@ jobs:
       - name: 🚀 Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
-        
+
       - name: 🎉 Deployment Success Notification
         run: |
           echo "🎉 Deployment completed successfully!"

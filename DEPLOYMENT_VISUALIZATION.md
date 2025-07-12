@@ -2,12 +2,12 @@
 
 ## 🌐 Live Website URLs
 
-| Purpose | URL | Description |
-|---------|-----|-------------|
-| **Main Website** | [https://mukhammadtukhsanov.github.io/lending-yolda/](https://mukhammadtukhsanov.github.io/lending-yolda/) | Your live Yolda landing page |
-| **Admin Dashboard** | [https://mukhammadtukhsanov.github.io/lending-yolda/admin/](https://mukhammadtukhsanov.github.io/lending-yolda/admin/) | Deployment monitoring & stats |
-| **GitHub Repository** | [https://github.com/MukhammadTukhsanov/lending-yolda](https://github.com/MukhammadTukhsanov/lending-yolda) | Source code |
-| **GitHub Actions** | [https://github.com/MukhammadTukhsanov/lending-yolda/actions](https://github.com/MukhammadTukhsanov/lending-yolda/actions) | Deployment history |
+| Purpose               | URL                                                                                                                        | Description                   |
+| --------------------- | -------------------------------------------------------------------------------------------------------------------------- | ----------------------------- |
+| **Main Website**      | [https://mukhammadtukhsanov.github.io/lending-yolda/](https://mukhammadtukhsanov.github.io/lending-yolda/)                 | Your live Yolda landing page  |
+| **Admin Dashboard**   | [https://mukhammadtukhsanov.github.io/lending-yolda/admin/](https://mukhammadtukhsanov.github.io/lending-yolda/admin/)     | Deployment monitoring & stats |
+| **GitHub Repository** | [https://github.com/MukhammadTukhsanov/lending-yolda](https://github.com/MukhammadTukhsanov/lending-yolda)                 | Source code                   |
+| **GitHub Actions**    | [https://github.com/MukhammadTukhsanov/lending-yolda/actions](https://github.com/MukhammadTukhsanov/lending-yolda/actions) | Deployment history            |
 
 ## 🚀 Quick Deploy
 
@@ -30,7 +30,7 @@
 ### 🎯 Access Points:
 
 - **Website**: Beautiful landing page with app download links
-- **Dashboard**: Admin panel for monitoring and statistics  
+- **Dashboard**: Admin panel for monitoring and statistics
 - **Repository**: Source code and development tools
 - **Actions**: Deployment automation and history
 
